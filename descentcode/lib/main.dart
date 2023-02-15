@@ -1,4 +1,5 @@
 import 'package:descentcode/providers/Products.dart';
+import 'package:descentcode/providers/cart.dart';
 import 'package:descentcode/widget/product_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,8 +15,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => Products(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => Products(),
+        ),
+        ChangeNotifierProvider(
+          create: ((context) => Cart()),
+        ),
+      ],
       child: MaterialApp(
         theme: ThemeData(
           colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.pink)
@@ -23,7 +31,7 @@ class MyApp extends StatelessWidget {
         ),
         home: ProductOverView(),
         routes: {
-          productDetail.routname:(context) => productDetail(),
+          productDetail.routname: (context) => productDetail(),
         },
       ),
     );

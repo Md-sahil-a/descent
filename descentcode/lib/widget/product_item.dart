@@ -1,3 +1,4 @@
+import 'package:descentcode/providers/cart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,32 +16,41 @@ class myItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final producd = Provider.of<Product>(context);
+    final cartItem = Provider.of<Cart>(context);
     return ClipRRect(
       borderRadius: BorderRadius.circular(15),
       child: GestureDetector(
-        onTap: (){
+        onTap: () {
           Navigator.of(context).pushNamed(
-          productDetail.routname,
-            arguments:producd.id ,
+            productDetail.routname,
+            arguments: producd.id,
           );
         },
         child: GridTile(
           footer: GridTileBar(
             backgroundColor: Colors.black54,
-            title: Text(producd.title,
-            textAlign: TextAlign.center,
+            title: Text(
+              producd.title,
+              textAlign: TextAlign.center,
             ),
             leading: IconButton(
-              icon:  Icon( producd.isFav? Icons.favorite : Icons.favorite_border),
+              icon:
+                  Icon(producd.isFav ? Icons.favorite : Icons.favorite_border),
               onPressed: () {
                 producd.changefav();
               },
               color: Theme.of(context).colorScheme.secondary,
             ),
-            trailing: IconButton(icon: const Icon(Icons.shopping_cart), onPressed: (){},),
+            trailing: IconButton(
+              icon: const Icon(Icons.shopping_cart),
+              onPressed: () {
+                cartItem.addProduct(producd.id, producd.title, producd.price);
+              },
+            ),
           ),
-          child:  Image.network(producd.imageUrl,
-          fit: BoxFit.cover,
+          child: Image.network(
+            producd.imageUrl,
+            fit: BoxFit.cover,
           ),
         ),
       ),

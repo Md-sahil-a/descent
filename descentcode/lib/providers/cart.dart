@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 class CartItem {
   final String id;
   final String title;
-  final double price;
+  final int price;
   final int quantity;
 
   CartItem({
@@ -23,7 +23,15 @@ class Cart with ChangeNotifier{
    int  get itemLength{
     return _items.length;
    }
-  void addProduct(String productId, String title, double price){
+
+  int get totalAmount {
+    var total = 0;
+    _items.forEach((key, value) {
+      total += value.price * value.quantity;
+    });
+    return total;
+  }
+  void addProduct(String productId, String title, int price){
     if(_items.containsKey(productId)){
       //..increase the quantity;
       _items.update(productId, (existingCartItem) => CartItem(id: existingCartItem.id, title: existingCartItem.title, quantity: existingCartItem.quantity +1, price: existingCartItem.price),);

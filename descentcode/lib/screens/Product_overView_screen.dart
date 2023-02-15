@@ -1,6 +1,7 @@
 // ignore: file_names
 import 'package:descentcode/providers/cart.dart';
 import 'package:descentcode/providers/product.dart';
+import 'package:descentcode/screens/cart_screen.dart';
 import 'package:descentcode/widget/badge.dart';
 import 'package:descentcode/widget/gridView.dart';
 import 'package:descentcode/widget/product_item.dart';
@@ -38,7 +39,6 @@ class _ProductOverViewState extends State<ProductOverView> {
             ],
             icon: Icon(Icons.more_vert),
             onSelected: (selectedValue) {
-              print(selectedValue);
               setState(() {
                 if (selectedValue == filterOptions.Fav) {
                   _showFav = true;
@@ -53,7 +53,10 @@ class _ProductOverViewState extends State<ProductOverView> {
                   color: Colors.red,
                   value: cart.itemLength.toString(),
                   child: IconButton(
-                    icon: Icon(Icons.shopping_cart), onPressed: () {  },
+                    icon: Icon(Icons.shopping_cart),
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(CartScreen.routeName);
+                    },
                   ),
                 )),
           )

@@ -1,5 +1,7 @@
+import 'package:descentcode/providers/Products.dart';
 import 'package:descentcode/widget/product_detail.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import './screens//Product_overView_screen.dart';
 
@@ -12,15 +14,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.pink)
-            .copyWith(secondary: Color.fromARGB(255, 8, 93, 162)),
+    return ChangeNotifierProvider(
+      create: (context) => Products(),
+      child: MaterialApp(
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.pink)
+              .copyWith(secondary: Color.fromARGB(255, 235, 31, 8)),
+        ),
+        home: ProductOverView(),
+        routes: {
+          productDetail.routname:(context) => productDetail(),
+        },
       ),
-      home: ProductOverView(),
-      routes: {
-        productDetail.routname:(context) => productDetail(),
-      },
     );
   }
 }

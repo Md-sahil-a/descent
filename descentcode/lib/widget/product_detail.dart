@@ -1,4 +1,8 @@
+import 'package:descentcode/providers/Products.dart';
 import 'package:flutter/material.dart';
+
+
+import 'package:provider/provider.dart';
 
 
 class productDetail extends StatelessWidget {
@@ -7,6 +11,7 @@ class productDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final argId  = ModalRoute.of(context)!.settings.arguments as String;
+    final prods = Provider.of<Products>(context).findbyid(argId);
     return Scaffold(
       body: Column(
         children: [
@@ -14,7 +19,7 @@ class productDetail extends StatelessWidget {
         ],
       ),
       appBar: AppBar(
-        title: Text(''),
+        title: Text(prods.title),
       ),
     );
   }

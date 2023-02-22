@@ -1,4 +1,5 @@
 import 'package:descentcode/providers/cart.dart';
+import 'package:descentcode/widget/cart_inner.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,7 +12,9 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final cartitem = Provider.of<Cart>(context);
     return Scaffold(
-      appBar: AppBar(title: const Text(' Your Cart'),),
+      appBar: AppBar(
+        title: const Text(' Your Cart'),
+      ),
       body: Column(
         children: [
           Padding(
@@ -33,17 +36,34 @@ class CartScreen extends StatelessWidget {
                   ),
                   Spacer(),
                   Chip(
-                    label: Text('\$${cartitem.totalAmount}',
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.secondary,
-                    ),
+                    label: Text(
+                      '\$${cartitem.totalAmount}',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
                     ),
                   ),
-                  const SizedBox(width: 10,),
-                TextButton(onPressed: () {  },
-                child: Text('order Now'),),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: Text('order Now'),
+                  ),
                 ],
               ),
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemBuilder: (ctx, i) => cartInner(
+                  id: cartitem.item.values.toList()[i].id,
+                  price: cartitem.item.values.toList()[i].price,
+                  quantity: cartitem.item.values.toList()[i].quantity,
+                  title: cartitem.item.values.toList()[i].title,
+                  productId: cartitem.item.keys.toList()[i],
+                  ),
+              itemCount: cartitem.itemLength,
             ),
           ),
         ],

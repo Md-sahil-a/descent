@@ -34,6 +34,20 @@ class cartInner extends StatelessWidget {
       ),
       direction: DismissDirection.endToStart,
       onDismissed: ((direction) => Provider.of<Cart>(context).removeItem(productId)),
+      confirmDismiss: (direction){
+        return showDialog(context: context, builder: ((ctx) => AlertDialog(
+          actions: [
+            TextButton(onPressed: (){
+              Navigator.of(ctx).pop(true);
+            }, child: const Text('Yes'),),
+            TextButton(onPressed: (){
+              Navigator.of(ctx).pop(false);
+            }, child: const Text('No'),),
+          ],
+          title: const Text('Are you sure?'),
+          content: const Text("if you chose yes than item will be deleted permanently"),
+        ) ));
+      },
       child: Card(
         margin: const EdgeInsets.all(10),
         elevation: 4,

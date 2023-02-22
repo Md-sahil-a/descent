@@ -10,7 +10,7 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cartitem = Provider.of<Cart>(context);
+    final cartitem = Provider.of<Cart>(context, listen: true);
     return Scaffold(
       appBar: AppBar(
         title: const Text(' Your Cart'),

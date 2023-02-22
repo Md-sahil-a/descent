@@ -2,6 +2,7 @@
 import 'package:descentcode/providers/cart.dart';
 import 'package:descentcode/providers/product.dart';
 import 'package:descentcode/screens/cart_screen.dart';
+import 'package:descentcode/widget/app_drawer.dart';
 import 'package:descentcode/widget/badge.dart';
 import 'package:descentcode/widget/gridView.dart';
 import 'package:descentcode/widget/product_item.dart';
@@ -23,6 +24,7 @@ class _ProductOverViewState extends State<ProductOverView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const AppDrawer(),
       appBar: AppBar(
         title: const Text("Descent Fashion"),
         actions: [
